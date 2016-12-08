@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   get 'lockers/index'
   post 'guests/create' => 'guests#create'
   patch 'lockers/:id' => 'lockers#update'
-  get 'guests/show' => 'guests#show'
-  post 'guests/logout' => 'guests#logout'
+  get 'guests/show/:id' => 'guests#show'
+  post 'guests/home' => 'guests#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

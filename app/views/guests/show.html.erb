@@ -9,7 +9,7 @@
 <% else %>
 	<h2>Thank you for checking in, <%= @guest.name %></h2>
 	<h3>Your locker number is <%= @guest.locker.id %></h3>
-	<form action="/guests/logout" method="post">
+	<form action="/guests/home" method="post">
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<input type="submit" value="Home">
 	</form>
