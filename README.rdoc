@@ -1,28 +1,11 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This program is designed to manage locker reservations at a hotel concierge desk. Upon check-in, the concierge will use the program to generate the appropriate locker number. This number is printed to the browser, and is ready to print on the guest's ticket. At this time, the respective locker's availability is updated in the database from true to false. Upon check-out, this action is reversed, and the locker is once again available.
 
-Things you may want to cover:
+Prompt:
 
-* Ruby version
+Write a program for managing locker reservations at a hotel concierge desk. Customers leave bags with the concierge, who then uses your program to determine in which locker to place the bag. The program tells the concierge the number of the locker in which to place the bag, and prints a ticket to give to the customer. Upon return, the customer provides the ticket, and the concierge uses that to look up the corresponding locker, retrieve the bag, and return it to the customer. There are 1000 small lockers, 1000 medium sized lockers, and 1000 large lockers. You can assume that all checked bags fit into one of these three sizes. The program should always assign the smallest available locker that fits the bag.
 
-* System dependencies
+Additional context:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+In the event that the guest attempts to check-in with a small bag while all of the small lockers are unavailable, the program will assign the guest a medium locker. Thus holding true to the prompt's final line, the program assigns the first locker that is available within the scope of that locker's size, and if necessary, moves up to the next size. This action does not work in reverse (no squeezing large bags into small lockers). Lastly, if all lockers are unavailable upon check-in, "Sorry, hotel is full" is printed to the browser. 
