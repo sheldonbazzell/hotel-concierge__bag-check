@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lockers</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<style>
+		body { padding: 20px 50px; }
+		.check-in { margin-bottom: 50px; }
+		.form-group { margin-right: 10px; }
+		.form-group input { margin-right: 5px; }
+		#name { border-radius: 3px; margin-left: 5px; }
+		.table { width: 50%; }
+	</style>
+</head>
+<body>
+<div class="check-in">
+	<h1>Check-In Guest</h1>
+	<form class="form-inline" action="/guests/create" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+		<div class="form-group">
+			<input type="text" id="name" name="guest[name]" placeholder="Guest Name" />
+		</div>
+		<div class="form-group">
+			<input type="radio" name="guest[bag]" value="small" />Small
+		</div>
+		<div class="form-group">
+			<input type="radio" name="guest[bag]" value="medium" />Medium
+		</div>
+		<div class="form-group">
+			<input type="radio" name="guest[bag]" value="large" />Large
+		</div>
+		<input class="btn btn-default btn-sm" type="submit" value="Find Locker">
+	</form>
+</div>
+<h2>Checked-In Guests</h2>
+<table class="table table-striped">
+	<tr>
+		<th>Guest</th>
+		<th>Locker</th>
+		<th></th>
+	</tr>
+	<% @guests.each do |guest| %>
+	<tr>
+		<td><%= guest.name %></td>
+		<td><%= guest.locker_id %></td>
+		<td>
+			<form action="/lockers/<%= guest.locker_id%>" method="post">
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+				<input type="hidden" name="_method" value="patch">
+				<input class="btn btn-default btn-sm" type="submit" value="Checkout <%= guest.name %>">
+			</form>
+		</td>
+	</tr>
+	<% end %>
+</table>
+</body>
+</html>
